@@ -45,23 +45,47 @@ int main()
         if(OPCAO == 0)
         {
             *(vetor1 + i) = i;
+            vetor2 = vetor1;
+            vetor3 = vetor1;
         }
     }
 
     //Teste Bubble Sort
-    imprimeVetor(vetor1, TAM);
 
+    printf("\n------------BUBBLE SORT----------\n");
+
+    imprimeVetor(vetor1, TAM);
     gettimeofday(&start, NULL);
-
     bubbleSort(vetor1, TAM);
-
     gettimeofday(&stop, NULL);
-
     tempo_decorrido = time_diff(&start, &stop);
-
     mensagem(tempo_decorrido);
-
     imprimeVetor(vetor1, TAM);
+
+    printf("------------------------------------\n");
+
+    printf("\n------------BUBBLE SORT VERSAO 1----------\n");
+    imprimeVetor(vetor2, TAM);
+    gettimeofday(&start, NULL);
+    bubbleSortMelhorado(vetor2, TAM);
+    gettimeofday(&stop, NULL);
+    tempo_decorrido = time_diff(&start, &stop);
+    mensagem(tempo_decorrido);
+    imprimeVetor(vetor2, TAM);
+
+    printf("------------------------------------\n");
+
+    printf("\n------------BUBBLE SORT VERSAO 2----------\n");
+    imprimeVetor(vetor3, TAM);
+    gettimeofday(&start, NULL);
+    bubbleSortPlus(vetor3, TAM);
+    gettimeofday(&stop, NULL);
+    tempo_decorrido = time_diff(&start, &stop);
+    mensagem(tempo_decorrido);
+    imprimeVetor(vetor3, TAM);
+
+    printf("------------------------------------\n");
+
 
     
 
@@ -75,13 +99,11 @@ double time_diff (struct timeval * start, struct timeval * stop)
 
 void bubbleSort(int * vetor, int size)
 {
-    int i; 
-    int j;
     int swap;
 
-    for(i = 1; i < size - 1; i++)
+    for(int i = 1; i < size - 1; i++)
     {
-        for(j = i - 1; j < size; j++)
+        for(int j = i - 1; j < size; j++)
         {
             if(vetor[j] > vetor[j+1])
             {
@@ -93,14 +115,62 @@ void bubbleSort(int * vetor, int size)
     }
 }
 
+void bubbleSortMelhorado(int * vetor, int size) //n² 
+{
+    int i;
+    int j;
+    int swap; 
+
+    for(i = 1; i > size; i++) 
+    {
+        for(j = size; j >= i; j--)
+        {
+            if(vetor[j] < vetor[j-1])
+            {
+                swap = vetor[j-1];
+                vetor[j-1] = vetor[j];
+                vetor[j] = swap;
+            }
+        }
+    }
+}
+
+void bubbleSortPlus(int * vetor, int size) //n²
+{
+    int troca = 1; 
+    int swap;
+    int j;
+    int i = 1;
+
+     while (i <= TAM && troca == 1)
+    {
+        troca = 0;
+        for(j = 0; j < TAM - 2; j++)
+        {
+            
+            if(vetor[j] > vetor[j+1])
+            {
+                troca = 1;
+                swap = vetor[j];
+                vetor[j] = vetor[j+1];
+                vetor[j+1] = swap;
+            }  
+        }   
+            i++;
+    }
+
+}
+
 void mensagem(float tempo)
 {
-    printf("Tempo decorrido: %.8f s\n", tempo);
+    printf("Tempo decorrido: %f s\n", tempo);
 }
 
 void imprimeVetor(int * vetor, int size)
 {
-     for(int i = 0; i < 10; i++)
+    printf("Vetor: ");
+
+    for(int i = 0; i < 10; i++)
     {
         printf("%d - ", *(vetor + i));
     }
