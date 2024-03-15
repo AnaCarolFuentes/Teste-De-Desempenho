@@ -1,3 +1,4 @@
+
 /*
 Autor(a): Ana Carolina Fuentes
 Objetivo do código -> Comparar o tempo de execução de diferentes algoritmos de ordenação 
@@ -12,7 +13,7 @@ Objetivo do código -> Comparar o tempo de execução de diferentes algoritmos d
 #include <sys/time.h>
 #endif
 
-#define TAM 10000
+#define TAM 10
 #define OPCAO 2 // 0-> ordenado, 1-> aleatório, 2-> inverso(decrescente)
 
 
@@ -173,7 +174,7 @@ void bubbleSortMelhorado(int * vetor, int size) //n²
     int j;
     int swap; 
 
-    for(i = 1; i < size; i++) 
+    for(i = 1; i < size - 1; i++) 
     {
         for(j = size; j >= i; j--)
         {
@@ -197,7 +198,7 @@ void bubbleSortPlus(int * vetor, int size) //n²
      while (i <= TAM && troca == 1)
     {
         troca = 0;
-        for(j = 0; j < TAM - 1; j++)
+        for(j = 0; j < TAM; j++)
         {
             
             if(vetor[j] > vetor[j+1])
@@ -216,7 +217,7 @@ void bubbleSortPlus(int * vetor, int size) //n²
 void insertionSort(int * vetor, int size) //compara sempre à esquerda do elemento
 {
     int eleito, j;
-    for(int i = 1; i < size - 1; i++)
+    for(int i = 1; i < size; i++)
     {
         eleito = vetor[i];
         j = i - 1;
