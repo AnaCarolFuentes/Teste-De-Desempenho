@@ -154,7 +154,7 @@ void bubbleSort(int * vetor, int size)
 {
     int swap;
 
-    for(int i = 0; i < size; i++)
+    for(int i = 1; i <= size; i++)
     {
         for(int j = 0; j < size; j++)
         {
